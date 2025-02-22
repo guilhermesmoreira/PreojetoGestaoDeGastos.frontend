@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { TabelaGastos } from '../TabelaGastos/TabelaGastos';
 
 export function UploadCSV() {
     const [file, setFile] = useState(null);
     const [message, setMessage] = useState('');
+    const [dados, setDados] = useState([]);
 
     //Função para lidar com o arquivo selecionado
     const handleFileChange = (event) => {
@@ -19,8 +21,7 @@ export function UploadCSV() {
     //Função para exportar o arquivo para o backend
 
     const handleFileUpload = async () => {
-        if (!file) {
-            console.error("Nenhum arquivo selecionado.");
+        if (!file) {            
             setMessage("Nenhum arquivo selecionado.");
             return;
         }
@@ -39,8 +40,9 @@ export function UploadCSV() {
             }
 
             const data = await response.json();
-            console.log("Resposta do servidor:", data);
+            console.log("Resposta do servidor:", data); // Resposta no console dos dados processados
             setMessage("Arquivo enviado com sucesso!");
+            setDados(data.sample_data); // Salva os dados processados para exibição
         } catch (error) {
             console.error("Erro ao conectar com o servidor:", error);
             setMessage("Erro ao conectar com o servidor.");
@@ -58,6 +60,8 @@ export function UploadCSV() {
             <button onClick={handleFileUpload}>Enviar</button>
 
             {message && <p>{message}</p>}
+
+            <TabelaGastos dados={dados} />
         </div>
     )
 }
