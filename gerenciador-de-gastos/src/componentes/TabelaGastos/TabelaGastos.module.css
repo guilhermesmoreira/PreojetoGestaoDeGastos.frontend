@@ -1,5 +1,5 @@
 body {
-    background-color: rgb(104, 103, 103);    
+    background-color: rgb(255, 255, 255);    
     font-family: Arial, sans-serif; /* Definir uma fonte legível */
 }
 .table_container {
@@ -48,7 +48,6 @@ body {
     font-weight: bold;
     color: #000000;
 }
-
 
 /* Mensagem quando não houver dados */
 .no_data {
